@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,10 +36,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.addBtn) {
-            Intent intent = new Intent(this, AddNote.class);
+            Intent intent = new Intent(this, AddNoteActivity.class);
             startActivity(intent);
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
