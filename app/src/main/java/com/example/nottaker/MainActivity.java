@@ -15,11 +15,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         this.toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(this.toolbar);
-
         this.recView = findViewById(R.id.noteList);
     }
 }
