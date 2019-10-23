@@ -82,7 +82,7 @@ public class NoteDB extends SQLiteOpenHelper {
         }
 
         return new Note(
-            String.valueOf(cursor.getLong(0)),
+            cursor.getLong(0),
             cursor.getString(1),
             cursor.getString(2),
             cursor.getString(3),
@@ -94,13 +94,13 @@ public class NoteDB extends SQLiteOpenHelper {
         SQLiteDatabase con = this.getReadableDatabase();
         List<Note> notes = new ArrayList<>();
 
-        String query = "SELECT * FROM "+DB_TABLE;
+        String query = "SELECT * FROM "+DB_TABLE+" ORDER BY id DESC";
         Cursor cursor = con.rawQuery(query, null);
 
-        if (cursor != null) {
+        if (cursor.moveToFirst()) {
             do {
                 Note note = new Note();
-                note.setId(String.valueOf(cursor.getLong(0)));
+                note.setId(cursor.getLong(0));
                 note.setTitle(cursor.getString(1));
                 note.setContent(cursor.getString(2));
                 note.setDate(cursor.getString(3));
