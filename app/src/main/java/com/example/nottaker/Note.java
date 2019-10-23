@@ -4,7 +4,8 @@ import androidx.annotation.NonNull;
 
 public class Note {
 
-    private String id, title, content, date, time;
+    private long id;
+    private String title, content, date, time;
 
     Note() {};
 
@@ -17,7 +18,7 @@ public class Note {
 
     }
 
-    Note(String id, String title, String content, String date, String time) {
+    Note(long id, String title, String content, String date, String time) {
 
         this.id = id;
         this.title = title;
@@ -27,11 +28,11 @@ public class Note {
 
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
