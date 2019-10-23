@@ -1,8 +1,10 @@
 package com.example.nottaker;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class NoteDB extends SQLiteOpenHelper {
 
@@ -20,7 +22,6 @@ public class NoteDB extends SQLiteOpenHelper {
 
     NoteDB(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-
     }
 
     @Override
@@ -43,5 +44,20 @@ public class NoteDB extends SQLiteOpenHelper {
         }
 
         con.execSQL("DROP TABLE IF EXISTS "+ DB_TABLE);
+    }
+
+    public long addNote (Note note) {
+        SQLiteDatabase con = this.getWritableDatabase();
+        ContentValues data = new ContentValues();
+
+        data.put(KEY_TITLE, note.getTitle());
+        data.put(KEY_CONTENT, note.getContent());
+        data.put(KEY_DATE, note.getDate());
+        data.put(KEY_TIME, note.getTime());
+
+        long id = con.insert(DB_TABLE, null, data);
+        Log.d("data id: ", "id --> "+id);
+
+        return id;
     }
 }
