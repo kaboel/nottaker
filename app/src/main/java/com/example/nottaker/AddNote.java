@@ -17,5 +17,8 @@ public class AddNote extends AppCompatActivity {
         setContentView(R.layout.activity_add_note);
         this.toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(this.toolbar);
+
+        this.noteTitle = findViewById(R.id.noteTitle);
+        this.noteContent = findViewById(R.id.noteContent);
     }
 }
