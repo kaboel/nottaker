@@ -2,9 +2,13 @@ package com.example.nottaker;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NoteDB extends SQLiteOpenHelper {
 
@@ -60,4 +64,53 @@ public class NoteDB extends SQLiteOpenHelper {
 
         return id;
     }
+
+    public Note getNote(long id) {
+        SQLiteDatabase con = this.getReadableDatabase();
+        Cursor cursor = con.query(
+            DB_TABLE,
+            new String[]{KEY_ID, KEY_TITLE, KEY_CONTENT, KEY_DATE, KEY_TIME},
+            KEY_ID+"=?",
+            new String[]{String.valueOf(id)},
+            null,
+            null,
+            null
+        );
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        return new Note(
+            String.valueOf(cursor.getLong(0)),
+            cursor.getString(1),
+            cursor.getString(2),
+            cursor.getString(3),
+            cursor.getString(4)
+        );
+    }
+
+    public List<Note> getNotes() {
+        SQLiteDatabase con = this.getReadableDatabase();
+        List<Note> notes = new ArrayList<>();
+
+        String query = "SELECT * FROM "+DB_TABLE;
+        Cursor cursor = con.rawQuery(query, null);
+
+        if (cursor != null) {
+            do {
+                Note note = new Note();
+                note.setId(String.valueOf(cursor.getLong(0)));
+                note.setTitle(cursor.getString(1));
+                note.setContent(cursor.getString(2));
+                note.setDate(cursor.getString(3));
+                note.setTime(cursor.getString(4));
+
+                notes.add(note);
+            } while (cursor.moveToNext());
+        }
+
+        return notes;
+    }
+
 }
