@@ -14,8 +14,8 @@ public class NoteDB extends SQLiteOpenHelper {
 
     // database info
     private static final int DB_VERSION = 2;
-    private static final String DB_NAME = "ndb";
-    private static final String DB_TABLE = "ntable";
+    private static final String DB_NAME = "noteDatabase";
+    private static final String DB_TABLE = "noteTable";
 
     // table colums
     private static final String KEY_ID = "id";
@@ -30,13 +30,13 @@ public class NoteDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase con) {
-        String query = "CREATE TABLE " + DB_TABLE +"(";
-        query += KEY_ID + " INT PRIMARY KEY, ";
-        query += KEY_TITLE + " TEXT, ";
-        query += KEY_CONTENT + " TEXT, ";
-        query += KEY_DATE + " TEXT, ";
-        query += KEY_TIME + " TEXT";
-        query += ")";
+        String query = "CREATE TABLE "+DB_TABLE+" ("+
+                KEY_ID+" INTEGER PRIMARY KEY,"+
+                KEY_TITLE+" TEXT,"+
+                KEY_CONTENT+" TEXT,"+
+                KEY_DATE+" TEXT,"+
+                KEY_TIME+" TEXT"
+                +" )";
 
         con.execSQL(query);
     }
@@ -61,6 +61,10 @@ public class NoteDB extends SQLiteOpenHelper {
 
         long id = con.insert(DB_TABLE, null, data);
         Log.d("data id: ", "id --> "+id);
+        Log.d("data id: ", "title --> "+note.getTitle());
+        Log.d("data id: ", "content --> "+note.getContent());
+        Log.d("data id: ", "date --> "+note.getDate());
+        Log.d("data id: ", "time --> "+note.getTime());
 
         return id;
     }
@@ -77,10 +81,9 @@ public class NoteDB extends SQLiteOpenHelper {
             null
         );
 
-        if (cursor != null) {
+        if (cursor.getCount() > 0) {
             cursor.moveToFirst();
         }
-
         return new Note(
             cursor.getLong(0),
             cursor.getString(1),
@@ -88,13 +91,14 @@ public class NoteDB extends SQLiteOpenHelper {
             cursor.getString(3),
             cursor.getString(4)
         );
+
     }
 
     public List<Note> getNotes() {
         SQLiteDatabase con = this.getReadableDatabase();
         List<Note> notes = new ArrayList<>();
 
-        String query = "SELECT * FROM "+DB_TABLE+" ORDER BY id DESC";
+        String query = "SELECT * FROM "+ DB_TABLE +" ORDER BY "+ KEY_ID +" DESC";
         Cursor cursor = con.rawQuery(query, null);
 
         if (cursor.moveToFirst()) {
@@ -105,6 +109,8 @@ public class NoteDB extends SQLiteOpenHelper {
                 note.setContent(cursor.getString(2));
                 note.setDate(cursor.getString(3));
                 note.setTime(cursor.getString(4));
+
+                Log.d("Cursor-ID", "ID -->> "+ cursor.getString(3));
 
                 notes.add(note);
             } while (cursor.moveToNext());
