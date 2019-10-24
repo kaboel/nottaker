@@ -18,11 +18,12 @@ import java.util.Calendar;
 
 public class AddNoteActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
-    EditText noteTitle, noteContent;
-    Calendar calendar;
-    String dateNow;
-    String timeNow;
+    private Toolbar toolbar;
+
+    private EditText noteTitle;
+    private EditText noteContent;
+
+    private Calendar calendar;
 
 
     @Override
@@ -33,6 +34,8 @@ public class AddNoteActivity extends AppCompatActivity {
         setSupportActionBar(this.toolbar);
         getSupportActionBar().setTitle("New Note");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        this.calendar = Calendar.getInstance();
 
         this.noteTitle = findViewById(R.id.noteTitle);
         this.noteContent = findViewById(R.id.noteContent);
@@ -53,16 +56,6 @@ public class AddNoteActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {}
         });
-
-        calendar = Calendar.getInstance();
-        dateNow = calendar.get(Calendar.YEAR)+"/";
-        dateNow += calendar.get(Calendar.MONTH)+1+"/";
-        dateNow += calendar.get(Calendar.DAY_OF_MONTH);
-
-        timeNow = pad(calendar.get(Calendar.HOUR))+":";
-        timeNow += pad(calendar.get(Calendar.MINUTE));
-
-//        Log.d("Calendar", "Date and Time: "+ this.dateNow +" || "+ this.timeNow);
     }
 
     @Override
@@ -71,6 +64,21 @@ public class AddNoteActivity extends AppCompatActivity {
         inflater.inflate(R.menu.save_menu, menu);
 
         return true;
+    }
+
+    private String setDate() {
+        String dateNow = this.calendar.get(Calendar.YEAR)+"/";
+        dateNow += this.calendar.get(Calendar.MONTH)+1+"/";
+        dateNow += this.calendar.get(Calendar.DAY_OF_MONTH);
+
+        return dateNow;
+    }
+
+    private String setTime() {
+        String timeNow = pad(this.calendar.get(Calendar.HOUR))+":";
+        timeNow += pad(this.calendar.get(Calendar.MINUTE));
+
+        return timeNow;
     }
 
     private String pad(int i) {
@@ -86,8 +94,8 @@ public class AddNoteActivity extends AppCompatActivity {
             Note note = new Note();
             note.setTitle(this.noteTitle.getText().toString());
             note.setContent(this.noteContent.getText().toString());
-            note.setDate(this.dateNow);
-            note.setTime(this.timeNow);
+            note.setDate(this.setDate());
+            note.setTime(this.setTime());
 
             NoteDB con = new NoteDB(this);
             if (con.addNote(note) != -1) {
