@@ -119,4 +119,9 @@ public class NoteModel extends SQLiteOpenHelper {
         return notes;
     }
 
+    public int destroy(long id) {
+        SQLiteDatabase con = this.getReadableDatabase();
+        return con.delete(DB_TABLE, KEY_ID+"=?", new String[]{String.valueOf(id)});
+    }
+
 }
