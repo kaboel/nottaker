@@ -119,8 +119,18 @@ public class NoteModel extends SQLiteOpenHelper {
         return notes;
     }
 
+    public int update(long id, Note note) {
+        SQLiteDatabase con = this.getWritableDatabase();
+        ContentValues data = new ContentValues();
+        data.put(KEY_TITLE, note.getTitle());
+        data.put(KEY_CONTENT, note.getContent());
+        data.put(KEY_DATE, note.getDate());
+        data.put(KEY_TIME, note.getTime());
+        return con.update(DB_TABLE, data,KEY_ID+"=?",new String[]{String.valueOf(id)});
+    }
+
     public int destroy(long id) {
-        SQLiteDatabase con = this.getReadableDatabase();
+        SQLiteDatabase con = this.getWritableDatabase();
         return con.delete(DB_TABLE, KEY_ID+"=?", new String[]{String.valueOf(id)});
     }
 
