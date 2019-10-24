@@ -1,6 +1,5 @@
 package com.example.nottaker.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,9 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.example.nottaker.R;
@@ -38,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
         this.notes = con.getNotes();
         this.recView = findViewById(R.id.noteList);
 
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        this.recView.setLayoutManager(llm);
+        this.recView.setLayoutManager(layoutManager);
         this.adapter = new Adapter(this, this.notes);
         this.recView.setAdapter(this.adapter);
 
