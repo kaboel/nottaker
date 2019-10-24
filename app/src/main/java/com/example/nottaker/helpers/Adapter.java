@@ -1,16 +1,17 @@
-package com.example.nottaker;
+package com.example.nottaker.helpers;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.nottaker.activities.NoteActivity;
+import com.example.nottaker.R;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private LayoutInflater inflater;
     private List<Note> notes;
 
-    Adapter(Context context, List<Note> notes) {
+    public  Adapter(Context context, List<Note> notes) {
         this.inflater = LayoutInflater.from(context);
         this.notes = notes;
     }

@@ -1,4 +1,4 @@
-package com.example.nottaker;
+package com.example.nottaker.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,10 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.example.nottaker.R;
+import com.example.nottaker.helpers.Adapter;
+import com.example.nottaker.helpers.Note;
+import com.example.nottaker.helpers.NoteModel;
 
 import java.util.List;
 
@@ -29,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         this.toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(this.toolbar);
 
-        NoteDB con = new NoteDB(this);
+        NoteModel con = new NoteModel(this);
         this.notes = con.getNotes();
         this.recView = findViewById(R.id.noteList);
 

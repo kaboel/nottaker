@@ -1,4 +1,4 @@
-package com.example.nottaker;
+package com.example.nottaker.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,12 +7,15 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.nottaker.R;
+import com.example.nottaker.helpers.Note;
+import com.example.nottaker.helpers.NoteModel;
 
 import java.util.Calendar;
 
@@ -97,7 +100,7 @@ public class AddNoteActivity extends AppCompatActivity {
             note.setDate(this.setDate());
             note.setTime(this.setTime());
 
-            NoteDB con = new NoteDB(this);
+            NoteModel con = new NoteModel(this);
             if (con.addNote(note) != -1) {
                 Toast.makeText(this,"Note saved!", Toast.LENGTH_SHORT).show();
                 onBackPressed();

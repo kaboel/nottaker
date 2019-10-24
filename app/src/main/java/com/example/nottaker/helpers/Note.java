@@ -1,15 +1,13 @@
-package com.example.nottaker;
-
-import androidx.annotation.NonNull;
+package com.example.nottaker.helpers;
 
 public class Note {
 
     private long id;
     private String title, content, date, time;
 
-    Note() {};
+    public Note() {};
 
-    Note(long id, String title, String content, String date, String time) {
+    public Note(long id, String title, String content, String date, String time) {
 
         this.id = id;
         this.title = title;

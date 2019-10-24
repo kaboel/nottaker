@@ -1,4 +1,4 @@
-package com.example.nottaker;
+package com.example.nottaker.helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,7 +10,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoteDB extends SQLiteOpenHelper {
+public class NoteModel extends SQLiteOpenHelper {
 
     // database info
     private static final int DB_VERSION = 2;
@@ -24,7 +24,7 @@ public class NoteDB extends SQLiteOpenHelper {
     private static final String KEY_DATE = "date";
     private static final String KEY_TIME = "time";
 
-    NoteDB(Context context) {
+    public NoteModel(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 

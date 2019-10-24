@@ -1,9 +1,10 @@
-package com.example.nottaker;
+package com.example.nottaker.activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.nottaker.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
