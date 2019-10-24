@@ -9,15 +9,6 @@ public class Note {
 
     Note() {};
 
-    Note(String title, String content, String date, String time) {
-
-        this.title = title;
-        this.content = content;
-        this.date = content;
-        this.time = content;
-
-    }
-
     Note(long id, String title, String content, String date, String time) {
 
         this.id = id;
