@@ -1,10 +1,13 @@
 package com.example.nottaker;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,10 +36,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         String title = notes.get(position).getTitle();
         String date = notes.get(position).getDate();
         String time = notes.get(position).getTime();
+        Long id = notes.get(position).getId();
 
         holder.noteTitle.setText(title);
         holder.noteDate.setText(date);
         holder.noteTime.setText(time);
+        holder.noteId.setText(String.valueOf(id));
     }
 
     @Override
@@ -46,14 +51,24 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView noteTitle, noteDate, noteTime;
+        TextView noteTitle, noteDate, noteTime, noteId;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
             noteTitle = itemView.findViewById(R.id.noteTitle);
             noteDate = itemView.findViewById(R.id.noteDate);
             noteTime = itemView.findViewById(R.id.noteTime);
+            noteId = itemView.findViewById(R.id.listId);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), NoteActivity.class);
+                    intent.putExtra("noteId", notes.get(getAdapterPosition()).getId());
+                    view.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }
