@@ -5,15 +5,15 @@ public class Note {
     private long id;
     private String title, content, date, time;
 
-    public Note() {};
+    public Note() {}
 
     public Note(long id, String title, String content, String date, String time) {
 
         this.id = id;
         this.title = title;
         this.content = content;
-        this.date = content;
-        this.time = content;
+        this.date = date;
+        this.time = time;
 
     }
 

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.nottaker.R;
 import com.example.nottaker.helpers.Adapter;
@@ -46,20 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.add_menu, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.addBtn) {
-            Intent intent = new Intent(this, AddNoteActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
+    public void handleAddNote(View view) {
+        Intent intent = new Intent(this, AddNoteActivity.class);
+        startActivity(intent);
     }
 }
