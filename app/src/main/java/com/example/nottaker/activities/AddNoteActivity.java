@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -102,7 +103,8 @@ public class AddNoteActivity extends AppCompatActivity {
 
             NoteModel con = new NoteModel(this);
             if (con.addNote(note) != -1) {
-                onBackPressed();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                Toast.makeText(this,"Note created!", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this,"An Error has occurred.", Toast.LENGTH_LONG).show();
             }
