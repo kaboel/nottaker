@@ -102,8 +102,9 @@ public class AddNoteActivity extends AppCompatActivity {
 
             NoteModel con = new NoteModel(this);
             if (con.addNote(note) != -1) {
-                Toast.makeText(this,"Note saved!", Toast.LENGTH_SHORT).show();
                 onBackPressed();
+            } else {
+                Toast.makeText(this,"An Error has occurred.", Toast.LENGTH_LONG).show();
             }
         }
 
