@@ -53,6 +53,7 @@ public class NoteActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 Intent intent = new Intent(getApplicationContext(), EditActivity.class);
                 intent.putExtra("noteId", note.getId());
                 startActivity(intent);
@@ -88,7 +89,6 @@ public class NoteActivity extends AppCompatActivity {
                 Toast.makeText(this, "An Error has occurred.", Toast.LENGTH_SHORT).show();
             }
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

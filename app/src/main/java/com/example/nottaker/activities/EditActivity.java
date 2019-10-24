@@ -122,9 +122,10 @@ public class EditActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.yes_btn_title, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                    Intent intent = new Intent(getApplicationContext(), NoteActivity.class);
-                    intent.putExtra("noteId", note.getId());
-                    startActivity(intent);
+                        finish();
+                        Intent intent = new Intent(getApplicationContext(), NoteActivity.class);
+                        intent.putExtra("noteId", note.getId());
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton(R.string.no_btn_title, null).show();
