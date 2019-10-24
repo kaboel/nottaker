@@ -53,7 +53,9 @@ public class NoteActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Edit Btn Clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), EditActivity.class);
+                intent.putExtra("noteId", note.getId());
+                startActivity(intent);
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -77,8 +79,8 @@ public class NoteActivity extends AppCompatActivity {
                     .setPositiveButton(R.string.yes_btn_title, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Toast.makeText(getApplicationContext(), "Note deleted!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            Toast.makeText(getApplicationContext(), "Note deleted!", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .setNegativeButton(R.string.no_btn_title, null).show();

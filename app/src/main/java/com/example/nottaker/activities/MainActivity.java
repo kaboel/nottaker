@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         this.recView.setLayoutManager(layoutManager);
         this.adapter = new Adapter(this, this.notes);
         this.recView.setAdapter(this.adapter);
-
     }
 
     public void handleAddNote(View view) {
