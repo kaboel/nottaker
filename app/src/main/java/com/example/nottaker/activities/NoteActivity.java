@@ -1,5 +1,6 @@
 package com.example.nottaker.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,6 +11,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -23,6 +25,8 @@ import android.widget.Toast;
 public class NoteActivity extends AppCompatActivity {
 
     TextView noteContent, lastEdit;
+    NoteModel con;
+    Note note;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +38,14 @@ public class NoteActivity extends AppCompatActivity {
         Intent intent = this.getIntent();
         long id = intent.getLongExtra("noteId", 0);
 
-        NoteModel con = new NoteModel(this);
-        Note note = con.getNote(id);
-        getSupportActionBar().setTitle(note.getTitle());
+        this.con = new NoteModel(this);
+        this.note = con.getNote(id);
 
         this.noteContent = findViewById(R.id.noteDetail);
         this.lastEdit = findViewById(R.id.lastEdited);
 
+        getSupportActionBar().setTitle(note.getTitle());
         this.noteContent.setText(note.getContent());
-
         String str = "Last Edited: "+ note.getDate() +" - "+ note.getTime();
         this.lastEdit.setText(str);
 
@@ -67,7 +70,21 @@ public class NoteActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.deleteBtn) {
-            Toast.makeText(this, "Delete Btn Clicked", Toast.LENGTH_SHORT).show();
+            if (this.con.destroy(this.note.getId()) != -1) {
+                new AlertDialog.Builder(this)
+                    .setTitle("Confirm Delete")
+                    .setMessage("Are you sure you want to delete this note?")
+                    .setPositiveButton(R.string.yes_btn_title, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(getApplicationContext(), "Note deleted!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        }
+                    })
+                    .setNegativeButton(R.string.no_btn_title, null).show();
+            } else {
+                Toast.makeText(this, "An Error has occurred.", Toast.LENGTH_SHORT).show();
+            }
         }
 
         return super.onOptionsItemSelected(item);
