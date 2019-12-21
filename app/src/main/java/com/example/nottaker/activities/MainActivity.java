@@ -45,5 +45,6 @@ public class MainActivity extends AppCompatActivity {
     public void handleAddNote(View view) {
         Intent intent = new Intent(this, AddNoteActivity.class);
         startActivity(intent);
+        finish();
     }
 }

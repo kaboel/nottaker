@@ -126,6 +126,7 @@ public class EditActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), NoteActivity.class);
                         intent.putExtra("noteId", note.getId());
                         startActivity(intent);
+                        finish();
                     }
                 })
                 .setNegativeButton(R.string.no_btn_title, null).show();

@@ -53,10 +53,10 @@ public class NoteActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
                 Intent intent = new Intent(getApplicationContext(), EditActivity.class);
                 intent.putExtra("noteId", note.getId());
                 startActivity(intent);
+                finish();
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -81,6 +81,7 @@ public class NoteActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            finish();
                             Toast.makeText(getApplicationContext(), "Note deleted!", Toast.LENGTH_SHORT).show();
                         }
                     })

@@ -103,8 +103,8 @@ public class AddNoteActivity extends AppCompatActivity {
 
             NoteModel con = new NoteModel(this);
             if (con.addNote(note) != -1) {
-                finish();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
                 Toast.makeText(this,"Note created!", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this,"An Error has occurred.", Toast.LENGTH_LONG).show();
