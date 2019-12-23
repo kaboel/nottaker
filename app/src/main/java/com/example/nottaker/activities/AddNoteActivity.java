@@ -92,22 +92,37 @@ public class AddNoteActivity extends AppCompatActivity {
         return String.valueOf(i);
     }
 
+    private boolean validate() {
+        String title = this.noteTitle.getText().toString();
+        String content = this.noteContent.getText().toString();
+
+        return !title.equalsIgnoreCase("") && !content.equalsIgnoreCase("");
+    }
+
+    private void saveNote() {
+        Note note = new Note();
+        note.setTitle(this.noteTitle.getText().toString());
+        note.setContent(this.noteContent.getText().toString());
+        note.setDate(this.setDate());
+        note.setTime(this.setTime());
+
+        NoteModel con = new NoteModel(this);
+        if (con.addNote(note) != -1) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+            Toast.makeText(this,"Note created!", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this,"An Error has occurred.", Toast.LENGTH_LONG).show();
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.saveBtn) {
-            Note note = new Note();
-            note.setTitle(this.noteTitle.getText().toString());
-            note.setContent(this.noteContent.getText().toString());
-            note.setDate(this.setDate());
-            note.setTime(this.setTime());
-
-            NoteModel con = new NoteModel(this);
-            if (con.addNote(note) != -1) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
-                Toast.makeText(this,"Note created!", Toast.LENGTH_LONG).show();
+            if (this.validate()) {
+                this.saveNote();
             } else {
-                Toast.makeText(this,"An Error has occurred.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Cannot create an empty note!", Toast.LENGTH_LONG).show();
             }
         }
 
