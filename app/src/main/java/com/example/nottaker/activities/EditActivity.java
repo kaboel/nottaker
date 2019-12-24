@@ -99,20 +99,45 @@ public class EditActivity extends AppCompatActivity {
         return String.valueOf(i);
     }
 
+    private boolean validateTitle() {
+        String title = this.noteTitle.getText().toString();
+        return !title.equalsIgnoreCase("");
+    }
+
+    private boolean validateContent() {
+        String content = this.noteContent.getText().toString();
+        return !content.equalsIgnoreCase("");
+    }
+
+    private void saveNote() {
+        Note note = new Note();
+        note.setTitle(this.noteTitle.getText().toString());
+        note.setContent(this.noteContent.getText().toString());
+        note.setDate(this.setDate());
+        note.setTime(this.setTime());
+
+        this.con = new NoteModel(getApplicationContext());
+        if (con.update(this.noteId, note) != -1) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+            Toast.makeText(getApplicationContext(), "Note updated!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this,"An Error has occurred.", Toast.LENGTH_LONG).show();
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.saveBtn) {
-            Note note = new Note();
-            note.setTitle(this.noteTitle.getText().toString());
-            note.setContent(this.noteContent.getText().toString());
-            note.setDate(this.setDate());
-            note.setTime(this.setTime());
 
-            this.con = new NoteModel(getApplicationContext());
-            if (con.update(this.noteId, note) != -1) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
-                Toast.makeText(getApplicationContext(), "Note updated!", Toast.LENGTH_SHORT).show();
+            if (!this.validateTitle() && this.validateContent()) {
+                Toast.makeText(this,"Title cannot be empty.", Toast.LENGTH_LONG).show();
+            } else if (this.validateTitle() && !this.validateContent()) {
+                Toast.makeText(this,"Content cannot be empty.", Toast.LENGTH_LONG).show();
+            } else if (!this.validateTitle() && !this.validateContent()) {
+                Toast.makeText(this,"Cannot save an empty Note.", Toast.LENGTH_LONG).show();
+            } else {
+                this.saveNote();
             }
 
         } else {
