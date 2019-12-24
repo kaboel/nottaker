@@ -6,9 +6,8 @@ import android.os.Bundle;
 
 import com.example.nottaker.R;
 import com.example.nottaker.helpers.Note;
-import com.example.nottaker.helpers.NoteModel;
+import com.example.nottaker.models.NoteModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;

@@ -12,7 +12,7 @@ import android.view.View;
 import com.example.nottaker.R;
 import com.example.nottaker.helpers.Adapter;
 import com.example.nottaker.helpers.Note;
-import com.example.nottaker.helpers.NoteModel;
+import com.example.nottaker.models.NoteModel;
 
 import java.util.List;
 

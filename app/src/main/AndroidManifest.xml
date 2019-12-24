@@ -19,7 +19,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.MainActivity"></activity>
-        <activity android:name=".activities.EditActivity" />
+        <activity android:name=".activities.EditActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nottaker.activities.MainActivity" />
+        </activity>
         <activity
             android:name=".activities.NoteActivity"
             android:label="@string/title_activity_note"
@@ -34,6 +38,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
