@@ -12,9 +12,6 @@ import android.widget.TextView;
 
 import com.example.nottaker.R;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class SplashActivity extends AppCompatActivity {
 
     @Override
